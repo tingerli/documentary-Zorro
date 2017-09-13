@@ -1,0 +1,40 @@
+<div class='search-block'>
+  <table class="table table-search table-bordered">
+    <tr>
+      <th>开始时间：</th>
+      <td>
+        <ace-date-picker mode='day' placeholder='请选择开始时间'></ace-date-picker>
+      </td>
+      <th>结束时间：</th>
+      <td>
+        <ace-date-picker mode='day' placeholder='请选择开始时间'></ace-date-picker>
+      </td>
+      <th>包裹状态</th>
+      <td>
+        <ace-dropdownselect></ace-dropdownselect>
+      </td>
+     
+    </tr>
+    <tr>
+        <th>渠道商</th>
+        <td>
+          <ace-dropdownselect></ace-dropdownselect>
+        </td>
+      <th>
+        跟踪号：
+      </th>
+      <td colspan="3">
+        <input type="text" placeholder="请输入完整跟踪号">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6" style='text-align:center'>
+        <ace-btn type='primary' text='查询' icon='fa-search fa' size='small'></ace-btn>
+        <ace-btn type='default' text='清空' size='small' icon='fa-undo fa'></ace-btn>
+      </td>
+    </tr>
+  </table>
+</div>
+<ace-table title='跟踪号为XXX的查询数据' [theadSource]='thead' [dataSource]='dataSource' [modalState]='modalState'
+tableHeight='350'
+></ace-table>

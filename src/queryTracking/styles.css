@@ -1,0 +1,64 @@
+/* You can add global styles to this file, and also import other style files */
+.btn:active{
+    border-color:dasd;
+}
+body {
+    background: #fff;
+}
+.search-block {
+    padding:5px 3px;
+}
+.table-search th
+{
+    background-color: #F8F8FC;
+}
+.table-search td
+{
+    background-color: rgb(254, 254, 254);
+}
+.dataTables_scrollBody table thead
+{
+    border: 0px;
+}
+.widget-toolbar > .btn-sm
+{
+    line-height: 1.39;
+}
+table.table-search > tbody > tr > th
+{
+    width: 10%;
+    text-align: right;
+    vertical-align: middle;
+}
+.table-search td
+{
+    width: 23%;
+}
+table.table-search > tbody > tr > th
+{
+    padding: 1px 6px 1px 6px;
+    line-height: 35px;
+    font-weight: normal;
+    color: rgb(0, 121, 25);
+}
+table.table-search > tbody > tr > td
+{
+    padding: 1px 0px 1px 6px;
+    line-height: 35px;
+}
+.table-search td input
+{
+    width: 165px;
+}
+.widget-main
+{
+    padding-bottom: 0px;
+}
+.table-search
+{
+    margin-bottom: 0px;
+}
+.table-search td .ctlDatetime
+{
+    width: 140px;
+}

@@ -1,0 +1,225 @@
+<!--<nz-layout>-->
+<!--<nz-row>
+    <nz-col [nzMd]="18">11</nz-col>
+    <nz-col [nzMd]="6">22</nz-col>
+  </nz-row>-->
+<!--</nz-layout>-->
+
+<nz-layout class="circulationSheet">
+  <nz-breadcrumb style="margin:12px 20px; font-size:14px;" [nzSeparator]="'>'">
+    <nz-breadcrumb-item>流转单</nz-breadcrumb-item>
+    <nz-breadcrumb-item>流转单</nz-breadcrumb-item>
+  </nz-breadcrumb>
+
+  <nz-content style="padding:0 10px;">
+    <!--<div style="background:#fff; padding: 24px; min-height: 280px;">Content</div>-->
+    <div class="widget-main" style="background:#fff;">
+      <table class="table table-bordered table-search">
+        <tbody>
+          <tr>
+            <th>流转单编号：</th>
+            <td><input type="text"></td>
+            <th>SKU编号：</th>
+            <td><input type="text"></td>
+            <th>POA编号：</th>
+            <td><input type="text"></td>
+          </tr>
+          <tr>
+            <th>创建人：</th>
+            <td><input type="text"></td>
+            <th>采购单编号：</th>
+            <td><input type="text"></td>
+            <th>跟踪号：</th>
+            <td><input type="text"></td>
+          </tr>
+          <tr>
+            <th>创建时间：</th>
+            <td>
+              <nz-datepicker style="width: 31%;" (ngModelChange)="_startDate=$event;_startValueChange()" [ngModel]="_startDate" [nzDisabledDate]="_disabledStartDate"
+                [nzShowTime]="true" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'起'"></nz-datepicker>
+              <nz-datepicker style="width: 31%;" (ngModelChange)="_endDate=$event;_endValueChange()" [ngModel]="_endDate" [nzDisabledDate]="_disabledEndDate"
+                [nzShowTime]="_endTime" [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'止'"></nz-datepicker>
+            </td>
+            <th>最后更新时间：</th>
+            <td>
+              <nz-datepicker [(ngModel)]="_date" [nzShowTime]="true" [nzPlaceHolder]="" [nzFormat]="'YYYY-MM-DD HH:mm:ss'"></nz-datepicker>
+            </td>
+            <th>采购中心：</th>
+            <td>
+              <ace-dropdownselect [width]="width" [placeholder]="'-请选择-'" [paging]="false" [dataSource]="shopCenter"></ace-dropdownselect>
+            </td>
+          </tr>
+          <tr>
+            <th>运输急缓：</th>
+            <td>
+              <ace-dropdownselect [width]="width" [placeholder]="'-请选择-'" [paging]="false" [dataSource]="transportation" [visCount]="10"></ace-dropdownselect>
+            </td>
+            <th>流转单状态：</th>
+            <td>
+              <ace-dropdownselect [width]="width" [placeholder]="'-请选择-'" [paging]="false" [dataSource]="sheetState"></ace-dropdownselect>
+            </td>
+            <th>跟单主管：</th>
+            <td>
+              <ace-dropdownselect [width]="width" [placeholder]="'-请选择-'" [paging]="false" [dataSource]="executives"></ace-dropdownselect>
+            </td>
+          </tr>
+          <tr>
+            <th>采购员：</th>
+            <td>
+              <ace-dropdownselect [width]="width" [placeholder]="'-请选择-'" [paging]="false" [dataSource]="merchandiser"></ace-dropdownselect>
+            </td>
+            <th>SKU基础状态：</th>
+            <td>
+              <ace-dropdownselect [width]="width" [placeholder]="'-请选择-'" [paging]="false" [dataSource]="skuState"></ace-dropdownselect>
+            </td>
+            <th>打印状态：</th>
+            <td>
+              <ace-dropdownselect [width]="width" [placeholder]="'-请选择-'" [paging]="false" [dataSource]="printState"></ace-dropdownselect>
+            </td>
+          </tr>
+          <tr>
+            <th>是否退税：</th>
+            <td>
+              <ace-dropdownselect [width]="width" [placeholder]="'-请选择-'" [paging]="false" [dataSource]="drawback"></ace-dropdownselect>
+            </td>
+            <th>PMC流转单单号：</th>
+            <td><input type="text"></td>
+            <th>供应商：</th>
+            <td>
+              <ace-dropdownselect [width]="width" [placeholder]="'-请选择-'" [paging]="false" [dataSource]="supplier"></ace-dropdownselect>
+            </td>
+          </tr>
+          <tr>
+            <th>最终处理中心：</th>
+            <td>
+              <ace-dropdownselect [width]="width" [placeholder]="'-请选择-'" [paging]="false" [dataSource]="finalCenter"></ace-dropdownselect>
+            </td>
+            <th>PMC出库人：</th>
+            <td><input type="text"></td>
+          </tr>
+          <tr>
+            <td colspan="6">
+              <div class="text-center">
+                <div class="allBtn" style="font-size:16px">
+                  <button nz-button [nzType]="'primary'" [nzSize]="'large'">
+                    <span>搜索</span><i class="anticon anticon-search"></i>
+                  </button>
+                  <button nz-button [nzType]="'default'" [nzSize]="'large'">
+                    <span>清空</span><i class="anticon anticon-reload"></i>
+                  </button>
+                  <button nz-button [nzType]="'default'" [nzSize]="'large'">
+                    <span>隐藏</span><i class="anticon anticon-arrow-left"></i>
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="circulationList widget-main" style="background:#fff;">
+      <nz-table #nzTable [nzAjaxData]="_dataSet" [nzShowSizeChanger]="true" [nzLoading]="_loading" [nzTotal]="_total" [(nzPageIndex)]="_current"
+        (nzPageIndexChange)="refreshData()" [(nzPageSize)]="_pageSize" (nzPageSizeChange)="refreshData(true)" [nzBordered]="true"
+        [nzShowTitle]="true" [nzShowFooter]="true" (nzDataChange)="_displayDataChange($event)" (nzPageSizeChange)="_refreshStatus()">
+        <!--<nz-table #nzTable [nzDataSource]="_dataSet" [nzPageSize]="10" (nzDataChange)="_displayDataChange($event)" (nzPageIndexChange)="_refreshStatus()"
+        (nzPageSizeChange)="_refreshStatus()" [nzBordered]="true" [nzShowTitle]="true" [nzShowFooter]="true" [nzPageSize]="10"
+        [nzShowSizeChanger]="true">-->
+        <div nz-table-title>
+          <div nz-row>
+            <div class="pull-left">
+              <div nz-col [nzSpan]="14">
+                <button nz-button [nzType]="'danger'" [nzSize]="'large'" style="margin-right:3px">
+                      <span>删除</span><i class="anticon anticon-delete"></i>
+                </button>
+                <button nz-button [nzType]="" [nzSize]="'large'" style="margin-right:3px">
+                      <span>签收</span><i class="anticon anticon-check"></i>
+                </button>
+                <button nz-button [nzType]="" [nzSize]="'large'" style="margin-right:3px">
+                      <span>打印</span><i class="anticon anticon-printer"></i>
+                </button>
+                <button nz-button [nzType]="" [nzSize]="'large'">
+                    <span>打印产品条码</span><i class="anticon anticon-barcode"></i>
+                </button>
+
+              </div>
+              <div nz-col [nzSpan]="5" style="margin-left:-13px">
+                <button nz-button [nzType]="" [nzSize]="'large'">
+                      <span>流转单清单打印</span><i class="anticon anticon-file-text"></i>
+                </button>
+              </div>
+              <div nz-col [nzSpan]="1" style="margin:2px 2px 0px 3px;">
+                <input nz-input>
+              </div>
+              <div nz-col [nzSpan]="1" style="padding:6px 0 0 2px;font-size:14px;">
+                <span>份</span>
+              </div>
+            </div>
+            <div class="pull-right">
+              <nz-radio-group [(ngModel)]="nzTabPosition">
+                <label nz-radio-button [nzValue]="'top'">
+                    <span>查看全部</span>
+                  </label>
+                <label nz-radio-button [nzValue]="'left'">
+                    <span>仅显示红单</span>
+                  </label>
+              </nz-radio-group>
+              <div [ngClass]="nzTabPosition"></div>
+            </div>
+          </div>
+        </div>
+        <thead nz-thead>
+          <tr>
+            <th nz-th [nzCheckbox]="true">
+              <label nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="_checkAll($event)">
+              </label>
+            </th>
+            <th nz-th>
+              <span>Name</span>
+              <nz-table-sort (nzValueChange)="sort($event)"></nz-table-sort>
+            </th>
+            <th nz-th>
+              <span>Age</span>
+              <nz-dropdown [nzTrigger]="'click'">
+                <i class="anticon anticon-filter" nz-dropdown></i>
+                <ul nz-menu>
+                  <li nz-menu-item *ngFor="let filter of _filterGender">
+                    <label nz-checkbox [(ngModel)]="filter.value">
+                    <span>{{filter.name}}</span>
+                  </label>
+                  </li>
+                </ul>
+                <div nz-table-filter>
+                  <span nz-table-filter-confirm (click)="refreshData(true)">OK</span>
+                  <span nz-table-filter-clear (click)="reset()">Reset</span>
+                </div>
+              </nz-dropdown>
+            </th>
+            <th nz-th><span>Email</span></th>
+          </tr>
+        </thead>
+        <tbody nz-tbody>
+          <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+            <td nz-td [nzCheckbox]="true">
+              <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="_refreshStatus($event)">
+              </label>
+            </td>
+            <td nz-td>
+              <a>{{data.name.first}} {{data.name.last}}</a>
+            </td>
+            <td nz-td>{{data.gender}}</td>
+            <td nz-td>{{data.email}}</td>
+          </tr>
+        </tbody>
+        <div nz-table-footer>
+          <div style="margin-bottom: 16px;">
+            <button nz-button [disabled]="_disabledButton" [nzType]="'primary'" [nzLoading]="_operating" (click)="_operateData()">Operating</button>
+            <span style="margin-left: 8px;" *ngIf="_checkedNumber">Selected {{_checkedNumber}} items</span>
+          </div>
+        </div>
+      </nz-table>
+    </div>
+
+  </nz-content>
+  <nz-footer style="text-align: center;">Ant Design ©2017 Implement By Angular</nz-footer>
+</nz-layout>

@@ -1,0 +1,35 @@
+<div class='search-block'>
+  <table class="table table-search table-bordered">
+    <tr>
+      <th>开始时间</th>
+      <td>
+        <ace-date-picker mode='day' placeholder='请选择开始时间'></ace-date-picker>
+      </td>
+      <th>结束时间</th>
+      <td>
+        <ace-date-picker mode='day' placeholder='请选择开始时间'></ace-date-picker>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" style='text-align:center'>
+        <ace-btn type='primary' text='查询' icon='fa-search fa' size='small'></ace-btn>
+        <ace-btn type='default' text='清空' size='small' icon='fa-undo fa'></ace-btn>
+      </td>
+    </tr>
+  </table>
+</div>
+<ul class='queryTask-info'>
+  <li>
+    <span>跟踪号总量：</span><b>100,000</b>
+  </li>
+  <li>
+    <span>成功率：</span><b>99.3%</b>
+  </li>
+  <li>
+    <span>异常率：</span><b>0.09%</b>
+  </li>
+</ul>
+<div style="height:550px">
+
+  <ace-chart type='bar' [chartSetting]='chartSetting' height='520'></ace-chart>
+</div>

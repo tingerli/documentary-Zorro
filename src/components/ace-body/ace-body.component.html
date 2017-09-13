@@ -1,0 +1,20 @@
+<div class='widget-box'>
+  <div class="widget-header widget-header-flat clearfix">
+    <h4 class="ace-body-title">
+      <b>{{title}}</b>
+    </h4>
+    <div class="widget-toolbar">
+      <a href="#"  (click)='clickIcon($event)' >
+        <!-- <i class="1 bigger-125 icon-chevron-up"></i> -->
+        <i class="fa fa-angle-up ace-body-icon" ></i>
+      </a>
+    </div>
+    <div class="widget-toolbar no-border">
+      <div class="widget-toolbar no-border">
+      </div>
+    </div>
+  </div>
+  <div class='ace-body-content'>
+    <ng-content></ng-content>
+  </div>
+</div>
